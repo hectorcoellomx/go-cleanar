@@ -14,12 +14,11 @@ func SetupRoutes(app *fiber.App, db *gorm.DB) {
 	userRepository := repositories.NewUserRepository(db)
 
 	userService := &user.UserService{UserRepository: userRepository}
-	//userService := &user.UserService.NewUserService(userRepository)
 
-	userUseCase := &user.userUseCase.NewUserUseCase(userService)
+	userUseCase := user.NewCreateUser(*userService)
 
-	/*userHandler := &handlers.UserHandler{ UserUseCase: userUseCase }*/
-	userHandler := &handlers.UserHandler.NewUserHandler(userUseCase, userUseCase)
+	userHandler := &handlers.UserHandler{UserUseCase: userUseCase}
+	//userHandler := handlers.NewUserHandler(userUseCase, userUseCase)
 
 	api := app.Group("/api")
 

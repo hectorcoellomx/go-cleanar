@@ -8,11 +8,11 @@ import (
 )
 
 type UserHandler struct {
-	UserUseCase  user.UserUseCase
-	UserUseCase2 user.UserUseCase
+	UserUseCase  user.CreateUser
+	UserUseCase2 user.CreateUser
 }
 
-func NewUserHandler(userUseCase user.UserUseCase, userUseCase2 user.UserUseCase) *UserHandler {
+func NewUserHandler(userUseCase user.CreateUser, userUseCase2 user.CreateUser) *UserHandler {
 	return &UserHandler{
 		UserUseCase:  userUseCase,
 		UserUseCase2: userUseCase2,
