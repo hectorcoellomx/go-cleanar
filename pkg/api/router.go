@@ -3,8 +3,8 @@ package api
 import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/hectorcoellomx/go-cleanar/internal/application/user"
+	"github.com/hectorcoellomx/go-cleanar/internal/infrastructure/handlers"
 	"github.com/hectorcoellomx/go-cleanar/internal/infrastructure/persistence/repositories"
-	"github.com/hectorcoellomx/go-cleanar/pkg/api/handlers"
 	"github.com/hectorcoellomx/go-cleanar/pkg/api/middleware"
 	"gorm.io/gorm"
 )
