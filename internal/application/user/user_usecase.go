@@ -1,8 +1,12 @@
 package user
 
+import (
+	"github.com/hectorcoellomx/go-cleanar/internal/domain/user"
+)
+
 type UserUseCase interface {
-	CreateUser(name string, email string) (*User, error)
-	GetUserByID(id uint) (*User, error)
+	CreateUser(name string, email string) (*user.User, error)
+	GetUserByID(id uint) (*user.User, error)
 }
 
 type userUseCase struct {
@@ -15,10 +19,10 @@ func NewUserUseCase(userService UserService) UserUseCase {
 	}
 }
 
-func (uc *userUseCase) CreateUser(name string, email string) (*User, error) {
+func (uc *userUseCase) CreateUser(name string, email string) (*user.User, error) {
 	return uc.userService.CreateUser(name, email)
 }
 
-func (uc *userUseCase) GetUserByID(id uint) (*User, error) {
+func (uc *userUseCase) GetUserByID(id uint) (*user.User, error) {
 	return uc.userService.GetUserByID(id)
 }

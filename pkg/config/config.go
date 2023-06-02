@@ -1,6 +1,11 @@
 package config
 
-import "github.com/spf13/viper"
+import (
+	"log"
+
+	"github.com/joho/godotenv"
+	"gorm.io/gorm"
+)
 
 type Config struct {
 	DatabaseURL string
@@ -8,8 +13,12 @@ type Config struct {
 }
 
 func LoadConfig() *Config {
-	viper.SetConfigFile(".env")
-	viper.ReadInConfig()
+
+	err := godotenv.Load()
+
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	return &Config{
 		DatabaseURL: viper.GetString("DATABASE_URL"),

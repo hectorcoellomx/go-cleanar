@@ -14,10 +14,10 @@ func NewUserService(userRepository user.Repository) *UserService {
 	}
 }
 
-func (us *UserService) CreateUser(name string, email string) (*user.User, error) {
+func (us *UserService) CreateUser(username string, email string) (*user.User, error) {
 	newUser := &user.User{
-		Name:  name,
-		Email: email,
+		Username: username,
+		Email:    email,
 	}
 
 	err := us.UserRepository.Create(newUser)
