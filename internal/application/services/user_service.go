@@ -8,6 +8,12 @@ type UserService struct {
 	UserRepository user.Repository
 }
 
+func NewUserService(userRepository user.Repository) *UserService {
+	return &UserService{
+		UserRepository: userRepository,
+	}
+}
+
 func (us *UserService) GetUsers() (*[]user.User, error) {
 	foundUser, err := us.UserRepository.Get()
 	if err != nil {
@@ -26,12 +32,6 @@ func (us *UserService) GetUserByID(id uint) (*user.User, error) {
 	}
 
 	return foundUser, nil
-}
-
-func NewUserService(userRepository user.Repository) *UserService {
-	return &UserService{
-		UserRepository: userRepository,
-	}
 }
 
 func (us *UserService) CreateUser(username string, email string) (*user.User, error) {
