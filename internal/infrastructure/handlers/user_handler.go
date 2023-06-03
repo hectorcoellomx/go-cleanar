@@ -17,7 +17,7 @@ func NewUserHandler(getUsersUseCase usecases.GetUsers) *UserHandler {
 
 func (h *UserHandler) GetUsers(c *fiber.Ctx) error {
 
-	users, err := h.GetUsersUseCase.Execute()
+	users, err := h.GetUsersUseCase.GetUsers()
 
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"success": false, "message": err.Error(), "error_code": 500})

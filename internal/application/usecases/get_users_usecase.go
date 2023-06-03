@@ -15,6 +15,6 @@ func NewGetUsers(userService services.UserService) *GetUsers {
 	}
 }
 
-func (uc *GetUsers) Execute() (*[]entities.User, error) {
+func (uc *GetUsers) GetUsers() (*[]entities.User, error) {
 	return uc.userService.GetUsers()
 }
