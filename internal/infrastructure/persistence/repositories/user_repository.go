@@ -15,7 +15,7 @@ func NewUserRepository(db *gorm.DB) *UserRepository {
 	}
 }
 
-func (ur *UserRepository) Get() (*[]user.User, error) {
+func (ur *UserRepository) FindAll() (*[]user.User, error) {
 
 	var users []user.User
 	err := ur.DB.Find(&users).Error

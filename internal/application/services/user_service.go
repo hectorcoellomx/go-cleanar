@@ -5,17 +5,17 @@ import (
 )
 
 type UserService struct {
-	UserRepository user.Repository
+	UserRepository user.UserRepositoryPort
 }
 
-func NewUserService(userRepository user.Repository) *UserService {
+func NewUserService(userRepository user.UserRepositoryPort) *UserService {
 	return &UserService{
 		UserRepository: userRepository,
 	}
 }
 
 func (us *UserService) GetUsers() (*[]user.User, error) {
-	foundUser, err := us.UserRepository.Get()
+	foundUser, err := us.UserRepository.FindAll()
 	if err != nil {
 		// Manejar el error de búsqueda del usuario por ID
 		return nil, err
