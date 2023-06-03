@@ -6,7 +6,7 @@ import (
 	"github.com/hectorcoellomx/go-cleanar/internal/application/usecases"
 
 	"github.com/hectorcoellomx/go-cleanar/internal/infrastructure/handlers"
-	"github.com/hectorcoellomx/go-cleanar/internal/infrastructure/persistence/repositories"
+	"github.com/hectorcoellomx/go-cleanar/internal/infrastructure/repositories"
 	"github.com/hectorcoellomx/go-cleanar/pkg/api/middleware"
 	"gorm.io/gorm"
 )
