@@ -30,5 +30,9 @@ func main() {
 
 	api.SetupRoutes(app, db)
 
+	app.Get("/docs", func(c *fiber.Ctx) error {
+		return c.SendFile("public/docs.html")
+	})
+
 	app.Listen(":8080")
 }
