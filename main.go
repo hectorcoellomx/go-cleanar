@@ -4,20 +4,23 @@ import (
 	"log"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/hectorcoellomx/go-cleanar/pkg/api"
 	"github.com/hectorcoellomx/go-cleanar/pkg/config"
 )
 
 func main() {
 	app := fiber.New()
 
-	// Configurar dependencias
 	cfg := config.LoadConfig()
-	db := config.InitDatabase(cfg.DatabaseURL)
+	db, err := config.InitDatabase(cfg)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Print(db)
 
 	// Configurar rutas y controladores
-	api.SetupRoutes(app, db)
+	//api.SetupRoutes(app, db)
 
-	// Iniciar el servidor
-	log.Fatal(app.Listen(":8080"))
+	app.Listen(":8080")
 }
