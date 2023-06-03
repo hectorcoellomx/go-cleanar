@@ -4,7 +4,7 @@ package user
 // podría llamarse UserRepositoryPort
 
 type Repository interface {
+	Get() (*[]User, error)
 	Create(user *User) error
 	FindByID(id uint) (*User, error)
-	// Otros métodos del repositorio necesarios para las operaciones de usuario
 }

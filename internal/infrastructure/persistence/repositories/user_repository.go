@@ -15,6 +15,18 @@ func NewUserRepository(db *gorm.DB) *UserRepository {
 	}
 }
 
+func (ur *UserRepository) Get() (*[]user.User, error) {
+
+	var users []user.User
+	err := ur.DB.Find(&users).Error
+	if err != nil {
+		// Manejar el error de creación del usuario
+		return nil, err
+	}
+
+	return &users, nil
+}
+
 func (ur *UserRepository) Create(user *user.User) error {
 	err := ur.DB.Create(user).Error
 	if err != nil {

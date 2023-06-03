@@ -1,4 +1,4 @@
-package user
+package services
 
 import (
 	"github.com/hectorcoellomx/go-cleanar/internal/domain/user"
@@ -6,6 +6,26 @@ import (
 
 type UserService struct {
 	UserRepository user.Repository
+}
+
+func (us *UserService) GetUsers() (*[]user.User, error) {
+	foundUser, err := us.UserRepository.Get()
+	if err != nil {
+		// Manejar el error de búsqueda del usuario por ID
+		return nil, err
+	}
+
+	return foundUser, nil
+}
+
+func (us *UserService) GetUserByID(id uint) (*user.User, error) {
+	foundUser, err := us.UserRepository.FindByID(id)
+	if err != nil {
+		// Manejar el error de búsqueda del usuario por ID
+		return nil, err
+	}
+
+	return foundUser, nil
 }
 
 func NewUserService(userRepository user.Repository) *UserService {
@@ -27,14 +47,4 @@ func (us *UserService) CreateUser(username string, email string) (*user.User, er
 	}
 
 	return newUser, nil
-}
-
-func (us *UserService) GetUserByID(id uint) (*user.User, error) {
-	foundUser, err := us.UserRepository.FindByID(id)
-	if err != nil {
-		// Manejar el error de búsqueda del usuario por ID
-		return nil, err
-	}
-
-	return foundUser, nil
 }

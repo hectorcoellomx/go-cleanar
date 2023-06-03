@@ -1,24 +1,33 @@
 package handlers
 
 import (
-	"strconv"
-
 	"github.com/gofiber/fiber/v2"
-	"github.com/hectorcoellomx/go-cleanar/internal/application/user"
+	"github.com/hectorcoellomx/go-cleanar/internal/application/usecases"
 )
 
 type UserHandler struct {
-	UserUseCase  user.CreateUser
-	UserUseCase2 user.CreateUser
+	GetUsersUseCase usecases.GetUsers
 }
 
-func NewUserHandler(userUseCase user.CreateUser, userUseCase2 user.CreateUser) *UserHandler {
+func NewUserHandler(getUsersUseCase usecases.GetUsers) *UserHandler {
 	return &UserHandler{
-		UserUseCase:  userUseCase,
-		UserUseCase2: userUseCase2,
+		GetUsersUseCase: getUsersUseCase,
 	}
 }
 
+func (h *UserHandler) GetUsers(c *fiber.Ctx) error {
+
+	users, err := h.GetUsersUseCase.Execute()
+
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"success": false, "message": err.Error(), "error_code": 500})
+	}
+
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{"success": true, "message": "Ok", "data": users})
+
+}
+
+/*
 func (h *UserHandler) CreateUser(c *fiber.Ctx) error {
 	// Obtener los datos del cuerpo de la solicitud
 	type CreateUserRequest struct {
@@ -76,3 +85,4 @@ func (h *UserHandler) GetUserByID(c *fiber.Ctx) error {
 
 	return c.JSON(foundUser)
 }
+*/
