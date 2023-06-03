@@ -1,11 +1,11 @@
 package ports
 
 import (
-	"github.com/hectorcoellomx/go-cleanar/internal/domain/user"
+	"github.com/hectorcoellomx/go-cleanar/internal/domain/entities"
 )
 
 type UserRepositoryPort interface {
-	FindAll() (*[]user.User, error)
-	Create(user *user.User) error
-	FindByID(id uint) (*user.User, error)
+	FindAll() (*[]entities.User, error)
+	Create(user *entities.User) error
+	FindByID(id uint) (*entities.User, error)
 }

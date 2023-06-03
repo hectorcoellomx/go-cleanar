@@ -2,7 +2,7 @@ package usecases
 
 import (
 	"github.com/hectorcoellomx/go-cleanar/internal/application/services"
-	"github.com/hectorcoellomx/go-cleanar/internal/domain/user"
+	"github.com/hectorcoellomx/go-cleanar/internal/domain/entities"
 )
 
 type GetUsers struct {
@@ -15,6 +15,6 @@ func NewGetUsers(userService services.UserService) *GetUsers {
 	}
 }
 
-func (uc *GetUsers) Execute() (*[]user.User, error) {
+func (uc *GetUsers) Execute() (*[]entities.User, error) {
 	return uc.userService.GetUsers()
 }

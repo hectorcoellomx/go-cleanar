@@ -5,7 +5,7 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
-	"github.com/hectorcoellomx/go-cleanar/internal/domain/user"
+	"github.com/hectorcoellomx/go-cleanar/internal/domain/entities"
 	"github.com/hectorcoellomx/go-cleanar/pkg/api"
 	"github.com/hectorcoellomx/go-cleanar/pkg/config"
 )
@@ -21,7 +21,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	db.AutoMigrate(&user.User{})
+	db.AutoMigrate(&entities.User{})
 
 	app.Use(cors.New(cors.Config{
 		AllowOrigins: "*",

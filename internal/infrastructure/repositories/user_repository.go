@@ -1,7 +1,7 @@
 package repositories
 
 import (
-	"github.com/hectorcoellomx/go-cleanar/internal/domain/user"
+	"github.com/hectorcoellomx/go-cleanar/internal/domain/entities"
 	"gorm.io/gorm"
 )
 
@@ -15,9 +15,9 @@ func NewUserRepository(db *gorm.DB) *UserRepository {
 	}
 }
 
-func (ur *UserRepository) FindAll() (*[]user.User, error) {
+func (ur *UserRepository) FindAll() (*[]entities.User, error) {
 
-	var users []user.User
+	var users []entities.User
 	err := ur.DB.Find(&users).Error
 	if err != nil {
 		// Manejar el error de creación del usuario
@@ -27,7 +27,7 @@ func (ur *UserRepository) FindAll() (*[]user.User, error) {
 	return &users, nil
 }
 
-func (ur *UserRepository) Create(user *user.User) error {
+func (ur *UserRepository) Create(user *entities.User) error {
 	err := ur.DB.Create(user).Error
 	if err != nil {
 		// Manejar el error de creación del usuario
@@ -37,8 +37,8 @@ func (ur *UserRepository) Create(user *user.User) error {
 	return nil
 }
 
-func (ur *UserRepository) FindByID(id uint) (*user.User, error) {
-	var user user.User
+func (ur *UserRepository) FindByID(id uint) (*entities.User, error) {
+	var user entities.User
 	err := ur.DB.First(&user, id).Error
 	if err != nil {
 		// Manejar el error de búsqueda del usuario por ID

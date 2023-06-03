@@ -1,8 +1,8 @@
 package services
 
 import (
+	"github.com/hectorcoellomx/go-cleanar/internal/domain/entities"
 	"github.com/hectorcoellomx/go-cleanar/internal/domain/ports"
-	"github.com/hectorcoellomx/go-cleanar/internal/domain/user"
 )
 
 type UserService struct {
@@ -15,7 +15,7 @@ func NewUserService(userRepository ports.UserRepositoryPort) *UserService {
 	}
 }
 
-func (us *UserService) GetUsers() (*[]user.User, error) {
+func (us *UserService) GetUsers() (*[]entities.User, error) {
 	foundUser, err := us.UserRepository.FindAll()
 	if err != nil {
 		// Manejar el error de búsqueda del usuario por ID
@@ -25,7 +25,7 @@ func (us *UserService) GetUsers() (*[]user.User, error) {
 	return foundUser, nil
 }
 
-func (us *UserService) GetUserByID(id uint) (*user.User, error) {
+func (us *UserService) GetUserByID(id uint) (*entities.User, error) {
 	foundUser, err := us.UserRepository.FindByID(id)
 	if err != nil {
 		// Manejar el error de búsqueda del usuario por ID
@@ -35,8 +35,8 @@ func (us *UserService) GetUserByID(id uint) (*user.User, error) {
 	return foundUser, nil
 }
 
-func (us *UserService) CreateUser(username string, email string) (*user.User, error) {
-	newUser := &user.User{
+func (us *UserService) CreateUser(username string, email string) (*entities.User, error) {
+	newUser := &entities.User{
 		Username: username,
 		Email:    email,
 	}
