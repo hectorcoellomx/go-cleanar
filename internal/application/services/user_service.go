@@ -1,14 +1,15 @@
 package services
 
 import (
+	"github.com/hectorcoellomx/go-cleanar/internal/domain/ports"
 	"github.com/hectorcoellomx/go-cleanar/internal/domain/user"
 )
 
 type UserService struct {
-	UserRepository user.UserRepositoryPort
+	UserRepository ports.UserRepositoryPort
 }
 
-func NewUserService(userRepository user.UserRepositoryPort) *UserService {
+func NewUserService(userRepository ports.UserRepositoryPort) *UserService {
 	return &UserService{
 		UserRepository: userRepository,
 	}
