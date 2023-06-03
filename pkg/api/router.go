@@ -18,8 +18,10 @@ func SetupRoutes(app *fiber.App, db *gorm.DB) {
 	getUserUsecase := usecases.NewGetUsers(*userService)
 	userHandler := handlers.NewUserHandler(*getUserUsecase)
 
-	api := app.Group("/api")
-	api.Get("/users", userHandler.GetUsers)
+	jwtmid := middleware.JWTMiddleware
 
-	api.Use(middleware.JWTMiddleware())
+	api := app.Group("/api")
+	api.Get("/users", jwtmid, userHandler.GetUsers)
+
+	//api.Use(middleware.JWTMiddlewareHandler())
 }
