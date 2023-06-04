@@ -1,20 +1,20 @@
-package usecases
+package auth
 
 import (
 	"github.com/hectorcoellomx/go-cleanar/internal/application/services"
 	"github.com/hectorcoellomx/go-cleanar/internal/domain/entities"
 )
 
-type GetUsers struct {
+type Login struct {
 	userService services.UserService
 }
 
-func NewGetUsers(userService services.UserService) *GetUsers {
-	return &GetUsers{
+func NewLogin(userService services.UserService) *Login {
+	return &Login{
 		userService: userService,
 	}
 }
 
-func (uc *GetUsers) GetUsers() (*[]entities.User, error) {
+func (uc *Login) Login() (*[]entities.User, error) {
 	return uc.userService.GetUsers()
 }

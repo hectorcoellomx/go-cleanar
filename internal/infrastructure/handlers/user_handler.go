@@ -2,14 +2,14 @@ package handlers
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/hectorcoellomx/go-cleanar/internal/application/usecases"
+	"github.com/hectorcoellomx/go-cleanar/internal/application/usecases/user"
 )
 
 type UserHandler struct {
-	GetUsersUseCase usecases.GetUsers
+	GetUsersUseCase user.GetUsers
 }
 
-func NewUserHandler(getUsersUseCase usecases.GetUsers) *UserHandler {
+func NewUserHandler(getUsersUseCase user.GetUsers) *UserHandler {
 	return &UserHandler{
 		GetUsersUseCase: getUsersUseCase,
 	}
