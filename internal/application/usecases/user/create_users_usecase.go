@@ -15,6 +15,6 @@ func NewCreateUsers(userService services.UserService) *CreateUser {
 	}
 }
 
-func (uc *CreateUser) CreateUser(id int, username string, email string, password string, status int) (*entities.User, error) {
-	return uc.userService.CreateUser(id, username, email, password, status)
+func (uc *CreateUser) CreateUser(id int, name string, email string, password string, status int) (*entities.User, error) {
+	return uc.userService.CreateUser(id, name, email, password, status)
 }

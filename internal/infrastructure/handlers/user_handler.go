@@ -33,7 +33,7 @@ func (h *UserHandler) CreateUser(c *fiber.Ctx) error {
 
 	type CreateUserRequest struct {
 		Id       int    `json:"id"`
-		Username string `json:"username"`
+		Name     string `json:"name"`
 		Email    string `json:"email"`
 		Password string `json:"password"`
 		Status   int    `json:"status"`
@@ -45,7 +45,7 @@ func (h *UserHandler) CreateUser(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"success": false, "message": err.Error(), "error_code": 400})
 	}
 
-	createdUser, err := h.CreateUserUseCase.CreateUser(req.Id, req.Username, req.Email, req.Password, req.Status)
+	createdUser, err := h.CreateUserUseCase.CreateUser(req.Id, req.Name, req.Email, req.Password, req.Status)
 
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"success": false, "message": err.Error(), "error_code": 500})
