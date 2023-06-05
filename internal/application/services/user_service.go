@@ -37,7 +37,7 @@ func (us *UserService) GetUserByID(id uint) (*entities.User, error) {
 
 func (us *UserService) CreateUser(id int, username string, email string, password string, status int) (*entities.User, error) {
 	newUser := &entities.User{
-		ID:       id,
+		Id:       id,
 		Username: username,
 		Email:    email,
 		Password: password,

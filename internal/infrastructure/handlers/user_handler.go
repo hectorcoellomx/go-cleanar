@@ -30,9 +30,9 @@ func (h *UserHandler) GetUsers(c *fiber.Ctx) error {
 }
 
 func (h *UserHandler) CreateUser(c *fiber.Ctx) error {
-	// Obtener los datos del cuerpo de la solicitud
+
 	type CreateUserRequest struct {
-		ID       int    `json:"ID"`
+		Id       int    `json:"id"`
 		Username string `json:"username"`
 		Email    string `json:"email"`
 		Password string `json:"password"`
@@ -40,23 +40,18 @@ func (h *UserHandler) CreateUser(c *fiber.Ctx) error {
 	}
 
 	req := new(CreateUserRequest)
+
 	if err := c.BodyParser(req); err != nil {
-		// Manejar el error de análisis del cuerpo de la solicitud
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"error": "Bad Request",
-		})
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"success": false, "message": err.Error(), "error_code": 400})
 	}
 
-	// Crear el usuario utilizando el caso de uso
-	createdUser, err := h.CreateUserUseCase.CreateUser(req.ID, req.Username, req.Email, req.Password, req.Status)
+	createdUser, err := h.CreateUserUseCase.CreateUser(req.Id, req.Username, req.Email, req.Password, req.Status)
+
 	if err != nil {
-		// Manejar el error de creación del usuario
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"error": "Internal Server Error",
-		})
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"success": false, "message": err.Error(), "error_code": 500})
 	}
 
-	return c.JSON(createdUser)
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{"success": true, "message": "Record created", "data": createdUser})
 }
 
 /*
