@@ -6,12 +6,14 @@ import (
 )
 
 type UserHandler struct {
-	GetUsersUseCase user.GetUsers
+	GetUsersUseCase   user.GetUsers
+	CreateUserUseCase user.CreateUser
 }
 
-func NewUserHandler(getUsersUseCase user.GetUsers) *UserHandler {
+func NewUserHandler(getUsersUseCase user.GetUsers, createUserUseCase user.CreateUser) *UserHandler {
 	return &UserHandler{
-		GetUsersUseCase: getUsersUseCase,
+		GetUsersUseCase:   getUsersUseCase,
+		CreateUserUseCase: createUserUseCase,
 	}
 }
 
@@ -27,12 +29,14 @@ func (h *UserHandler) GetUsers(c *fiber.Ctx) error {
 
 }
 
-/*
 func (h *UserHandler) CreateUser(c *fiber.Ctx) error {
 	// Obtener los datos del cuerpo de la solicitud
 	type CreateUserRequest struct {
-		Name  string `json:"name"`
-		Email string `json:"email"`
+		ID       int    `json:"ID"`
+		Username string `json:"username"`
+		Email    string `json:"email"`
+		Password string `json:"password"`
+		Status   int    `json:"status"`
 	}
 
 	req := new(CreateUserRequest)
@@ -44,7 +48,7 @@ func (h *UserHandler) CreateUser(c *fiber.Ctx) error {
 	}
 
 	// Crear el usuario utilizando el caso de uso
-	createdUser, err := h.UserUseCase.CreateUser(req.Name, req.Email)
+	createdUser, err := h.CreateUserUseCase.CreateUser(req.ID, req.Username, req.Email, req.Password, req.Status)
 	if err != nil {
 		// Manejar el error de creación del usuario
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
@@ -55,6 +59,7 @@ func (h *UserHandler) CreateUser(c *fiber.Ctx) error {
 	return c.JSON(createdUser)
 }
 
+/*
 func (h *UserHandler) GetUserByID(c *fiber.Ctx) error {
 	// Obtener el ID del parámetro de la ruta
 	id := c.Params("id", "0")

@@ -19,7 +19,8 @@ func SetupRoutes(app *fiber.App, db *gorm.DB) {
 	userRepository := repositories.NewUserRepository(db)
 	userService := services.NewUserService(userRepository)
 	getUserUsecase := user.NewGetUsers(*userService)
-	userHandler := handlers.NewUserHandler(*getUserUsecase)
+	createUserUsecase := user.NewCreateUsers(*userService)
+	userHandler := handlers.NewUserHandler(*getUserUsecase, *createUserUsecase)
 
 	loginUsecase := auth.NewLogin(*userService)
 	loginHandler := handlers.NewAuthHandler(*loginUsecase)
@@ -30,6 +31,7 @@ func SetupRoutes(app *fiber.App, db *gorm.DB) {
 	api.Get("/refresh-token", loginHandler.RefreshToken)
 
 	api.Get("/users", jwtmid, userHandler.GetUsers)
+	api.Post("/users", jwtmid, userHandler.CreateUser)
 
 	//api.Use(middleware.JWTMiddlewareHandler())
 }
